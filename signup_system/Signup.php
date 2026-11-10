@@ -17,12 +17,14 @@ class Signup extends Dbh{
         }
     }
 
-    private function signupUser(){
+    public function signupUser(){
         //Error handlers
         if($this->isEmptySubmit()){
             header("Location".$_SERVER['DOCUMENT_ROOT']. '/index.php' );
             die();
         }
+        //if there is no error signup the user.
+        $this->insertUser();
     }
 
     //stmt=$this->connect()->prepare($query)
@@ -35,7 +37,5 @@ class Signup extends Dbh{
 //Here we are using not $this->connect()because this will refer to the method of Dbh and
 //if there were any method of same name as connect()
 
-//if no error,signup user
-    $this->insertUser();
     }
 }

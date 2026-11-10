@@ -1,0 +1,137 @@
+<?php
+
+abstract class Vehicle{
+// An abstract class is a class that cannot be instantiate directly.it acts as a base class for other classes.
+//that means it cannot have an object like $vehicle01=new Vehicle(); but it can have its own properties,
+//constructor and everything. it a base form of all the classes extending it.
+    protected $brand;
+
+    //using constructor to initialize the properties with values
+
+    private function _construct($brand){
+        $this->brand=$brand;
+    }
+
+// Normal getters use to read or retirve a private property from outside the class.it is used to retrive data in exactly same ay.
+    private function getBrand(){
+        return $this->brand;
+    }
+//we can also use abstract getter and setter when each child class need to calculate,fetch or validate 
+//data in different way.
+
+    //Abstract method
+    abstract public function move();
+ 
+//so abstract method are methods in which the inheriting class must provide its own implementation of the method
+//and it should be public it cannot be private.as private keyword blocks child classes from seeding
+//or overriding it.        
+    
+} 
+
+class Car extends Vehicle{
+    public function move(){
+        echo "Car is driving";
+    }
+}
+
+class Bike extends Vehicle{
+    public function move(){
+        echo "Bike is riding";
+    }
+}
+
+//Now we will create the object
+
+$car01=new Car("BMW");
+$bike01=new Bike("Ducati");
+
+echo $car->getBrand();
+echo "<br>";
+
+$car->move();
+
+echo "<br>";
+
+$bike->move();
+
+/*
+When multiple related classes share common properties or functionality, 
+but some behavior must be implemented differently by each child class.
+ */
+
+
+//Interface---An interface defines a contract that a class must follow.
+//it is like set of rules a class have to follow.
+
+/*In an interface a public method is declared without implementation and now every other class 
+which is implementing the interface must implement it with its own functionality
+A class can implement multiple interfaces
+*/
+
+
+interface Drivable {
+    public function drive();
+}
+
+interface Chargeable {
+    public function charge();
+}
+
+class ElectricCar implements Drivable, Chargeable {
+
+    public function drive() {
+        echo "Driving";
+    }
+
+    public function charge() {
+        echo "Charging";
+    }
+
+}// Any class implementing Chargeable must have a public charge() method.
+
+
+$car = new ElectricCar();
+$phone = new Smartphone();
+
+$car->charge();
+
+echo "<br>";
+
+$phone->charge();
+
+
+// Polymorphism--means many forms.
+/*
+polymorphism allows different classes to have same method name but provide their own implementation.
+ */
+
+
+abstract class Vehicle {
+
+    abstract public function move();
+
+}
+
+class Car extends Vehicle {
+
+    public function move() {
+        echo "Car is driving";
+    }
+
+}
+
+class Bike extends Vehicle {
+
+    public function move() {
+        echo "Bike is riding";
+    }
+
+}
+
+class Boat extends Vehicle {
+
+    public function move() {
+        echo "Boat is sailing";
+    }
+
+}
